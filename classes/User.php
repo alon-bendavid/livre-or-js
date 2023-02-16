@@ -22,7 +22,7 @@ class User
 
 
     //register the acount into the database and print a tbale with the user details----------------------------------------------------------------
-    public function register($login,  $firstname, $lastname, $password)
+    public function register($login,  $password)
     {
         // check if username already exist
         $stmt = $this->conn->prepare("SELECT id FROM utilisateurs WHERE login = ?");
@@ -30,6 +30,7 @@ class User
         $stmt->execute();
         $stmt->store_result();
         if ($stmt->num_rows > 0) {
+            echo "username already exist";
             return "username already exist";
         }
 
@@ -39,12 +40,14 @@ class User
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Insert new user
-        $stmt = $this->conn->prepare("INSERT INTO utilisateurs (login, password, email, firstname, lastname) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $login, $hashed_password, $firstname, $lastname);
+        $stmt = $this->conn->prepare("INSERT INTO utilisateurs (login, password) VALUES (?, ?)");
+        $stmt->bind_param("ss", $login, $hashed_password);
         if ($stmt->execute()) {
-            return "username created";
+            echo "username created";
+
+            return true;
         } else {
-            return "error";
+            return false;
         }
     }
 

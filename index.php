@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>livreor-js</title>
     <script src="script.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css\style.css">
+    <script defer src="script.js"></script>
+
 </head>
 
 <body>
     <!-- //////////////////inscrption\\\\\\\\\\\\\\\\\\\\\ -->
     <div class="inscrption">
         <h1>sign up page</h1>
-        <form action="inscription.php" method="post">
-            <input type="text" placeholder="username" name="username"><br required>
-            <input type="password" placeholder="password" name="password" required><br>
-            <input type="password" placeholder="retype password" name="repass" required><br>
-            <button type="submit" name="submit">
-                <h2 class="sign">Sign Up!</h2>
-            </button>
+        <form method="post" id="signUp" name="signUp">
+            <input id="username" type="text" placeholder="username" name="username" required><br>
+            <input id="password" type="password" placeholder="password" name="password" required><br>
+            <input type="password" placeholder="retype password" name="repass"><br>
+            <button type="submit" name="inscrptionSub" id="inscrptionSub">submit </button>
 
 
         </form>
@@ -41,7 +41,7 @@
         <h3 class="small_link"><a href="inscription.php">
                 Not a member yet? <strong>Sign Up!</strong>
             </a></h3>
-        <a class="logoGit" href="https://github.com/alon-bendavid/livre-or"><img src="..\media\GitHub-Logo.png" alt=""></a>
+        <!-- <a class="logoGit" href="https://github.com/alon-bendavid/livre-or"><img src="..\media\GitHub-Logo.png" alt=""></a> -->
     </div>
     <!-- //////////////////profil\\\\\\\\\\\\\\\\\\\\\ -->
     <div class="profil">
