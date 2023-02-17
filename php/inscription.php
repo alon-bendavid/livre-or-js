@@ -1,31 +1,32 @@
 <?php
 require_once("../classes/User.php");
 //fetch connecxion data
-if (isset($_POST["signUp"])) {
+// var_dump($_POST);
+// if (isset($_POST["inscrptionSub"])) {
 
 
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    // $repass = $_POST["repass"];
+$username = $_POST["username"];
+$password = $_POST["password"];
+// $repass = $_POST["repass"];
 
-    //create a new usr object and start a database connection
-    $userTest = new User("$username");
+//create a new usr object and start a database connection
+$userTest = new User("$username");
 
-    //signup the user if doesnt exist
-    $userTest->register($username,  $password);
+//signup the user if doesnt exist
+$userTest->register($username,  $password);
+// var_dump($_SESSION["user"]);
 
+// echo $userTest->login;
+// echo "$userTest->login  <br>";
 
-    // echo $userTest->login;
-    // echo "$userTest->login  <br>";
-
-    // echo "$loginPwd  <br>";
-    // echo "$loginUsr  <br>";
-    // if ($userTest->register($username, $password)) {
-    //     $response = array("success" => true);
-    // } else {
-    //     $response = array("success" => false, "message" => "User already exists.");
-    // }
+// echo "$loginPwd  <br>";
+// echo "$loginUsr  <br>";
+if ($userTest->register($username, $password)) {
+    $response = array("success" => true);
+} else {
+    $response = array("success" => false, "message" => "User already exists.");
+}
 
     // Return the response as a JSON string
-    echo json_encode($response);
-}
+    // echo $response;
+// }

@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>livreor-js</title>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="css\style.css">
     <script defer src="script.js"></script>
 
@@ -16,11 +15,11 @@
     <!-- //////////////////inscrption\\\\\\\\\\\\\\\\\\\\\ -->
     <div class="inscrption">
         <h1>sign up page</h1>
-        <form method="post" id="signUp" name="signUp">
-            <input id="username" type="text" placeholder="username" name="username" required><br>
-            <input id="password" type="password" placeholder="password" name="password" required><br>
-            <input type="password" placeholder="retype password" name="repass"><br>
-            <button type="submit" name="inscrptionSub" id="inscrptionSub">submit </button>
+        <form id="signUp">
+            <input type="text" placeholder="username" name="username"><br>
+            <input type="password" placeholder="password" name="password"><br>
+            <!-- <input type="password" placeholder="retype password" name="repass"><br> -->
+            <button name="inscrptionSub" id="inscrptionSub">submit </button>
 
 
         </form>
