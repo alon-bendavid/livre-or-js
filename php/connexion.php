@@ -7,9 +7,9 @@ $loginPwd = $_POST["loginPwd"];
 //create a new usr object and start a database connection
 $userTest = new User("$loginUsr");
 
-
+$userTest->login($loginUsr, $loginPwd);
 // echo $userTest->login;
-echo "$userTest->login  <br>";
+// echo "$userTest->login  <br>";
 
-echo "$loginPwd  <br>";
-echo "$loginUsr  <br>";
+// echo "$loginPwd  <br>";
+// echo "$loginUsr  <br>";

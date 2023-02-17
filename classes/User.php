@@ -2,9 +2,7 @@
 class User
 {
     private $id;
-    public $login;
-    public $firstname;
-    public $lastname;
+    private $login;
     public $password;
     private $conn;
 
@@ -22,7 +20,7 @@ class User
 
 
     //register the acount into the database and print a tbale with the user details----------------------------------------------------------------
-    public function register($login,  $password)
+    public function register($login,  $password, $repass)
     {
         // check if username already exist
         $stmt = $this->conn->prepare("SELECT id FROM utilisateurs WHERE login = ?");
@@ -31,9 +29,12 @@ class User
         $stmt->store_result();
         if ($stmt->num_rows > 0) {
             echo "username already exist";
-            return "username already exist";
+            return false;
         }
-
+        if ($repass != $password) {
+            echo "Make sure password is the same";
+            return false;
+        }
 
 
         // Hash password
@@ -52,41 +53,45 @@ class User
     }
 
 
-    //login user--------------------------------------------------------------------------------------------------------------------------
-    // public function login($login, $password)
-    // {
-    //     $stmt = $this->conn->prepare("SELECT id, password FROM utilisateurs WHERE login = ?");
-    //     $stmt->bind_param("s", $login);
-    //     $stmt->execute();
-    //     $stmt->bind_result($id, $hashed_password);
-    //     $stmt->fetch();
-    //     if (password_verify($password, $hashed_password)) {
-    //         $this->id = $id;
-    //         $_SESSION['user'] = $this->login;
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-    /////////////////////////////// wituhout hashed password just for testing 
-
-
-
+    // login user--------------------------------------------------------------------------------------------------------------------------
     public function login($login, $password)
     {
         $stmt = $this->conn->prepare("SELECT id, password FROM utilisateurs WHERE login = ?");
         $stmt->bind_param("s", $login);
         $stmt->execute();
-        $stmt->bind_result($id, $password);
+        $stmt->bind_result($id, $hashed_password);
         $stmt->fetch();
-        if ($password == $password) {
+        var_dump($login);
+        var_dump($password);
+        if (password_verify($password, $hashed_password)) {
             $this->id = $id;
-            $_SESSION['user'] = $login;
-            return $id;
+            $_SESSION['user'] = $this->login;
+            echo "you are now connects";
+            return true;
         } else {
+            echo "something went worng";
             return false;
         }
     }
+    /////////////////////////////// wituhout hashed password just for testing 
+
+
+
+    // public function login($login, $password)
+    // {
+    //     $stmt = $this->conn->prepare("SELECT id, password FROM utilisateurs WHERE login = ?");
+    //     $stmt->bind_param("s", $login);
+    //     $stmt->execute();
+    //     $stmt->bind_result($id, $password);
+    //     $stmt->fetch();
+    //     if ($password == $password) {
+    //         $this->id = $id;
+    //         $_SESSION['user'] = $login;
+    //         return $id;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
 
     // disconnect user---------------------------------------------------------------------------------------------------------------------
@@ -128,8 +133,6 @@ class User
         echo "<table>";
         echo "<tr><th>ID</th><td>" . $this->id . "</td></tr>";
         echo "<tr><th>Login</th><td>" . $this->login . "</td></tr>";
-        echo "<tr><th>First Name</th><td>" . $this->firstname . "</td></tr>";
-        echo "<tr><th>Last Name</th><td>" . $this->lastname . "</td></tr>";
         echo "</table>";
     }
     //return specific user information--------------------------------------------------------------------------------------------------------
@@ -137,16 +140,5 @@ class User
     public function getLogin()
     {
         return $this->login;
-    }
-
-    // first name------------------------
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
-    // last name-------------------------
-    public function getLastname()
-    {
-        return $this->lastname;
     }
 }

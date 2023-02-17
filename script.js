@@ -1,6 +1,9 @@
 // document.addEventListener('DOMContentLoaded', function() {
+  ////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////handling the inscription form////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
     const form = document.getElementById("signUp");
-    console.log(form);
+    // console.log(form);
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const payLoad = new FormData(form);
@@ -8,28 +11,51 @@
       for (item of payLoad) {
         console.log(item[0], item[1]);    
       }  
+      //start the async function to fetch the data
       postData(payLoad); 
     })
     // });
     async function postData(payLoad){
-      /**
-       * If we want to 'POST' something we need to change the `method` to 'POST'
-       * 'POST' also expectes the request to send along values inside of `body`
-       * so we must specify that property too. We use the earlier created 
-       * FormData()-object and just pass it along.
-       */
+//fetching the data
       const response = await fetch('./php/inscription.php',{
           method: 'POST',
           body: payLoad
       });
-      /*
-       * Because we are using `echo` inside of `handle_form.php` the response
-       * will be a string and not JSON-data. Because of this we need to use
-       * `response.text()` instead of `response.json()` to convert it to someting
-       * that JavaScript understands
-       */
+//since i use echo i need to handle the response with text method
       const data = await response.text();
-      //This should now print out the values that we sent to the backend-side
+      // print out the values i sent to the backend-side
       console.log(data);
   }
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////handling the connexon //////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+
+  const connexionForm = document.getElementById("connexion");
+
+
+  connexionForm.addEventListener("submit" , (e)=>{
+e.preventDefault();
+//fetch the data from the form
+
+const connexionData = new FormData(connexionForm);
+
+for (const item of connexionData) {
+  console.log(item[0], item[1]);
+}
+fetchConnexion(connexionData);
+ })
+
+ async function fetchConnexion(connexionData){
+
+  const response = await fetch("./php/connexion.php",{
+
+    method: 'POST',
+    body: connexionData
+  }); 
     
+const data = await response.text();
+console.log(data);
+
+  }

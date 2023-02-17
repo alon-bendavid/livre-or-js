@@ -17,8 +17,8 @@
         <h1>sign up page</h1>
         <form id="signUp">
             <input type="text" placeholder="username" name="username"><br>
-            <input type="password" placeholder="password" name="password"><br>
-            <!-- <input type="password" placeholder="retype password" name="repass"><br> -->
+            <input type="password" placeholder="password" name="password" required><br>
+            <input type="password" placeholder="retype password" name="repass" required><br>
             <button name="inscrptionSub" id="inscrptionSub">submit </button>
 
 
@@ -27,12 +27,12 @@
     <!-- //////////////////connexion\\\\\\\\\\\\\\\\\\\\\ -->
     <div class="connection_form">
         <h2>Sign in!</h2>
-        <form action="php\connexion.php" method="post">
-            loginUsr <input type="text" placeholder="username" name="loginUsr"><br required>
+        <form id="connexion">
+            <input type="text" placeholder="username" name="loginUsr" required><br>
 
-            loginPwd <input type="password" placeholder="password" name="loginPwd" required><br>
+            <input type="password" placeholder="password" name="loginPwd" required><br>
 
-            loginSub <button type="submit" name="loginSub">
+            <button type="submit" name="loginSub">
                 <h2 class="sign">Sign in</h2>
             </button>
 

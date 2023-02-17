@@ -7,13 +7,13 @@ require_once("../classes/User.php");
 
 $username = $_POST["username"];
 $password = $_POST["password"];
-// $repass = $_POST["repass"];
+$repass = $_POST["repass"];
 
 //create a new usr object and start a database connection
 $userTest = new User("$username");
 
 //signup the user if doesnt exist
-$userTest->register($username,  $password);
+$userTest->register($username,  $password, $repass);
 // var_dump($_SESSION["user"]);
 
 // echo $userTest->login;
@@ -21,11 +21,11 @@ $userTest->register($username,  $password);
 
 // echo "$loginPwd  <br>";
 // echo "$loginUsr  <br>";
-if ($userTest->register($username, $password)) {
-    $response = array("success" => true);
-} else {
-    $response = array("success" => false, "message" => "User already exists.");
-}
+// if ($userTest->register($username, $password)) {
+//     $response = array("success" => true, "message" => "User created");
+// } else {
+//     $response = array("fail" => false, "message" => "User already exists.");
+// }
 
     // Return the response as a JSON string
     // echo $response;
